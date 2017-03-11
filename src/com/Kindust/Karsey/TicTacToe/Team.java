@@ -1,18 +1,18 @@
 package com.Kindust.Karsey.TicTacToe;
 
+import java.util.Scanner;
+
 public class Team {
 	Team t;
-	String[] teams = {" ", "X", "O"};
+	String[] teams = {"H", "X", "O"};
 	int team;
 	
-	public Team(boolean isX){
-		team = 0;
+	public Team(int team){
+		this.team = team;
 	}
 	
 	public void setTeam(int t){
-		if(t != team){
-			team = t;
-		}
+		team = t;
 	}
 	
 	public String getTeam(){
