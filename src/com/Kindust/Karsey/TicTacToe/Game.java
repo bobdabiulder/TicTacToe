@@ -33,19 +33,27 @@ public class Game {
 	}
 
 	public void gameLoop() {
+		boolean first = true;
 		while (!win && !tie) {
 			updateBoard();
 			int nxt = userInput();
 			while (nxt == 1000) {
+				System.out.println("Malformed input!  Retry.");
 				nxt = userInput();
 			}
 			space[nxt].setTeam(1);
+			avail.remove((Object) nxt);
+			//avail.remove(avail.indexOf(nxt));
 			checkW();
 			checkTie();
+			System.out.println(avail.clone());
 			AI ai = new AI(space, avail);
-			enactAI(ai.aiMove(nxt));
+			enactAI(ai.aiMove(nxt, first));
+			System.out.println(avail.clone());
+			System.out.println(space.clone());
 			checkW();
 			checkTie();
+			first = false;
 		}
 
 		System.out.println();
@@ -53,7 +61,7 @@ public class Game {
 		System.out.println();
 		updateBoard();
 		if (win) {
-			System.out.println(winner + " wins!!");
+			System.out.println(winner + " wins!!  Congrats.  I guarentee its not X :D");
 		}
 		if (tie) {
 			System.out.println("Issa tie!");
@@ -67,6 +75,9 @@ public class Game {
 	}
 
 	public void updateBoard() {
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		System.out.println();
 		for (int i = 0; i < avail.size(); i++) {
 			System.out.println(avail.get(i));
@@ -110,6 +121,7 @@ public class Game {
 
 				if (-1 < in && in < 9) {
 					validInput = true;
+					
 					return in;
 				} else {
 					// System.out.println("ERROR");
@@ -124,6 +136,10 @@ public class Game {
 	}
 
 	public void enactAI(int move) {
+		if(move == 1000){
+			tie = true;
+			return;
+		}
 		if (Integer.valueOf(space[move].getTeam(false)) != 0) {
 			System.out.println("ERROR");
 			System.exit(1);
@@ -143,11 +159,7 @@ public class Game {
 		}
 	}
 
-	public void checkTie() {
-		if (avail.size() == 0) {
-			tie = true;
-		}
-	}
+	
 
 	public void spit() {
 		System.out.println();
@@ -164,7 +176,11 @@ public class Game {
 		 * System.out.println();
 		 */
 	}
-
+	public void checkTie() {
+		if (avail.size() == 0) {
+			tie = true;
+		}
+	}
 	public boolean aWin() {
 		if (Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[1].getTeam(false))
 				&& Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[2].getTeam(false))
