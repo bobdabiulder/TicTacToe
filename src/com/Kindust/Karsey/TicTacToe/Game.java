@@ -13,7 +13,7 @@ public class Game {
 	int[] col;
 	int r, c;
 	String winner;
-	boolean win, tie;
+	boolean win, tie, validInput;
 
 	public Game(Space[] space, int[] value, int[] row, int[] col, int r, int c) {
 		this.space = space;
@@ -35,21 +35,27 @@ public class Game {
 	public void gameLoop() {
 		while (!win && !tie) {
 			updateBoard();
-			space[userInput()].setTeam(1);
+			int nxt = userInput();
+			while (nxt == 1000) {
+				nxt = userInput();
+			}
+			space[nxt].setTeam(1);
+			checkW();
+			checkTie();
 			AI ai = new AI(space, avail);
-			enactAI(ai.aiMove());
+			enactAI(ai.aiMove(nxt));
 			checkW();
 			checkTie();
 		}
-		
+
 		System.out.println();
 		System.out.println();
 		System.out.println();
 		updateBoard();
-		if(win){
-			System.out.println(winner + " wins!!");			
+		if (win) {
+			System.out.println(winner + " wins!!");
 		}
-		if(tie){
+		if (tie) {
 			System.out.println("Issa tie!");
 		}
 	}
@@ -83,32 +89,50 @@ public class Game {
 	}
 
 	public int userInput() {
-		Scanner sc = new Scanner(System.in);
-		int in = sc.nextInt();
-		
-		if (Integer.valueOf(space[in].getTeam(false)) != 0) {
-			System.out.println("ERROR");
-			System.exit(1);
+		validInput = false;
+		main: while (!validInput) {
+			one: while (!validInput) {
+				Scanner sc = new Scanner(System.in);
+				System.out.print("Input space #: ");
+				int in = sc.nextInt();
+
+				try {
+					if (Integer.valueOf(space[in].getTeam(false)) != 0) {
+						// System.out.println("ERROR");
+						// System.exit(1);
+						validInput = false;
+						System.out.print("Invalid! Reenter number, spot already occupied.");
+						break one;
+					} else {
+					}
+				} catch (Exception e) {
+				}
+
+				if (-1 < in && in < 9) {
+					validInput = true;
+					return in;
+				} else {
+					// System.out.println("ERROR");
+					// System.exit(1);
+					validInput = false;
+					System.out.print("Invalid!  Number must be 0 to 8, excluding taken spots.  ");
+					break one;
+				}
+			}
 		}
-		avail.remove((Object) in);
-		if (in < 9) {
-			return in;
-		} else {
-			System.out.println("ERROR");
-			System.exit(1);
-		}
-		return in;
+		return 1000;
 	}
-	
-	public void enactAI(int move){
+
+	public void enactAI(int move) {
 		if (Integer.valueOf(space[move].getTeam(false)) != 0) {
 			System.out.println("ERROR");
 			System.exit(1);
 		}
 		avail.remove((Object) move);
 		space[move].setTeam(2);
-		
+
 	}
+
 	public void aiMove() {
 
 	}
@@ -120,7 +144,7 @@ public class Game {
 	}
 
 	public void checkTie() {
-		if(avail.size() == 0){
+		if (avail.size() == 0) {
 			tie = true;
 		}
 	}
@@ -163,9 +187,9 @@ public class Game {
 			win = true;
 			return true;
 		}
-		
+
 		////////////////////////
-		
+
 		if (Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[4].getTeam(false))
 				&& Integer.valueOf(space[4].getTeam(false)) == Integer.valueOf(space[8].getTeam(false))
 				&& Integer.valueOf(space[0].getTeam(false)) != 0) {
