@@ -13,7 +13,7 @@ public class Game {
 	int[] col;
 	int r, c;
 	String winner;
-	boolean win;
+	boolean win, tie;
 
 	public Game(Space[] space, int[] value, int[] row, int[] col, int r, int c) {
 		this.space = space;
@@ -33,18 +33,25 @@ public class Game {
 	}
 
 	public void gameLoop() {
-		while (!win) {
+		while (!win && !tie) {
 			updateBoard();
 			space[userInput()].setTeam(1);
-			aiMove();
+			AI ai = new AI(space, avail);
+			enactAI(ai.aiMove());
 			checkW();
 			checkTie();
 		}
+		
 		System.out.println();
 		System.out.println();
 		System.out.println();
 		updateBoard();
-		System.out.println(winner + " wins!!");
+		if(win){
+			System.out.println(winner + " wins!!");			
+		}
+		if(tie){
+			System.out.println("Issa tie!");
+		}
 	}
 
 	public void populate() {
@@ -92,7 +99,16 @@ public class Game {
 		}
 		return in;
 	}
-
+	
+	public void enactAI(int move){
+		if (Integer.valueOf(space[move].getTeam(false)) != 0) {
+			System.out.println("ERROR");
+			System.exit(1);
+		}
+		avail.remove((Object) move);
+		space[move].setTeam(2);
+		
+	}
 	public void aiMove() {
 
 	}
@@ -104,7 +120,9 @@ public class Game {
 	}
 
 	public void checkTie() {
-
+		if(avail.size() == 0){
+			tie = true;
+		}
 	}
 
 	public void spit() {
