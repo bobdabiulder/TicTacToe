@@ -44,15 +44,17 @@ public class Game {
 			space[nxt].setTeam(1);
 			avail.remove((Object) nxt);
 			//avail.remove(avail.indexOf(nxt));
-			checkW();
-			checkTie();
+			if(checkW() || checkTie()){
+				break;
+			}
 			System.out.println(avail.clone());
 			AI ai = new AI(space, avail);
 			enactAI(ai.aiMove(nxt, first));
 			System.out.println(avail.clone());
 			System.out.println(space.clone());
-			checkW();
-			checkTie();
+			if(checkW() || checkTie()){
+				break;
+			}
 			first = false;
 		}
 
@@ -157,14 +159,6 @@ public class Game {
 
 	}
 
-	public void checkW() {
-		if (aWin()) {
-			win = true;
-		}
-	}
-
-	
-
 	public void spit() {
 		System.out.println();
 		System.out.println();
@@ -180,10 +174,20 @@ public class Game {
 		 * System.out.println();
 		 */
 	}
-	public void checkTie() {
+	
+	public boolean checkW() {
+		if (aWin()) {
+			win = true;
+			return true;
+		}
+		return false;
+	}
+	public boolean checkTie() {
 		if (avail.size() == 0) {
 			tie = true;
+			return true;
 		}
+		return false;
 	}
 	public boolean aWin() {
 		if (Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[1].getTeam(false))
