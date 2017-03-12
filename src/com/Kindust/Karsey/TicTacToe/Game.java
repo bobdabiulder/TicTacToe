@@ -160,13 +160,12 @@ public class Game {
 		System.out.println();
 		System.out.println();
 		System.out.println("Board Layout:");
-		System.out.print(" ");
 		for (int i = 0; i < 9; i++) {
-			System.out.print(i);
+			System.out.print(" " + i);
 			if (i == 2 || i == 5 || i == 8) {
 				System.out.println();
 			} else {
-				System.out.print(" | ");
+				System.out.print(" |");
 			}
 			if (i == 2 || i == 5) {
 				System.out.println("---|---|---");
