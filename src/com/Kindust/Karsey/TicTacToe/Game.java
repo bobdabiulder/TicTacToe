@@ -178,7 +178,7 @@ public class Game {
 		 * space[i1].getTeam(true) + "(" + space[i1].getTeam(false) + ")"); if(r
 		 * != 2){ r++; } else { r = 0; c++; } } System.out.println();
 		 * System.out.println();
-		 */
+		 */ 
 	}
 
 	public boolean checkW() {
