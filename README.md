@@ -1,5 +1,5 @@
 # TicTacToe
-Hey!  Welcome!  Try this out, just go to the release and grab the jar.
+Hey!  Welcome!  To try this out, just go to the release and grab the jar.  This is a simple and easily usable Tic Tac Toe game for anyone.  Visit the wiki for more info.
 
 <br/>
 <br/>
