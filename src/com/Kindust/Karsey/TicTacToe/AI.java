@@ -2,8 +2,6 @@ package com.Kindust.Karsey.TicTacToe;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
 public class AI {
 	Space[] space;
@@ -27,25 +25,21 @@ public class AI {
 	private int move(boolean first) {
 		int best = Integer.MAX_VALUE;
 		int worst = Integer.MIN_VALUE;
-		if(availible.size() == 0){
+		if (availible.size() == 0) {
 			return 1000;
 		}
-			int r = new SecureRandom().nextInt(availible.size());
-		System.out.print("22222sdf   ");
-		// System.out.println(availible.get(0) + " " +availible.get(1) + " "
-		// +availible.get(2) + " " +availible.get(3) + " " +availible.get(4) + "
-		// " );
-		// return availible.get(r);
+		int r = new SecureRandom().nextInt(availible.size());
+		int backupPick = availible.get(r);
 		int out = minimax();
 		if (first) {
 			first = false;
-			System.out.println("First move!  Must pick " + r);
+			System.out.println("First move!  Must pick " + backupPick);
 			return availible.get(r);
 		} else if (out > 8) {
-			System.out.println("Code 0 error; Unable to decide, picking: " + r);
+			System.out.println("Code 0 error; Unable to decide, picking: " + backupPick);
 			return availible.get(r);
 		} else if (!availible.contains(out)) {
-			System.out.println("Code 1 error; Unable to decide, picking: " + r);
+			System.out.println("Code 1 error; Unable to decide, picking: " + backupPick);
 			return availible.get(r);
 		}
 		System.out.println("Going at " + out);
@@ -86,8 +80,10 @@ public class AI {
 					"Score assidd " + space[winpat[i][0]].getTeam(false) + " " + space[winpat[i][1]].getTeam(false)
 							+ " " + space[winpat[i][2]].getTeam(false) + " /Team:" + space[i].getTeam(false));
 			// for(int i1 = 0; i1 < winpat[i].length; i1++){
-			if (Integer.parseInt(space[winpat[i][0]].getTeam(false)) == Integer.parseInt(space[winpat[i][1]].getTeam(false)) && Integer.parseInt(space[winpat[i][2]].getTeam(false)) == 0
-						&& Integer.parseInt(space[winpat[i][0]].getTeam(false)) != 0) {
+			if (Integer.parseInt(space[winpat[i][0]].getTeam(false)) == Integer
+					.parseInt(space[winpat[i][1]].getTeam(false))
+					&& Integer.parseInt(space[winpat[i][2]].getTeam(false)) == 0
+					&& Integer.parseInt(space[winpat[i][0]].getTeam(false)) != 0) {
 				if (Integer.parseInt(space[winpat[i][0]].getTeam(false)) == 1) {
 					scores[availible.indexOf(winpat[i][2])] = 10;
 					System.out.println("Score assigned 10");
@@ -101,8 +97,10 @@ public class AI {
 				}
 				System.out.println("Score assigned");
 
-			} else if (Integer.parseInt(space[winpat[i][1]].getTeam(false)) == Integer.parseInt(space[winpat[i][2]].getTeam(false)) && Integer.parseInt(space[winpat[i][0]].getTeam(false)) == 0
-						&& Integer.parseInt(space[winpat[i][1]].getTeam(false)) != 0) {
+			} else if (Integer.parseInt(space[winpat[i][1]].getTeam(false)) == Integer
+					.parseInt(space[winpat[i][2]].getTeam(false))
+					&& Integer.parseInt(space[winpat[i][0]].getTeam(false)) == 0
+					&& Integer.parseInt(space[winpat[i][1]].getTeam(false)) != 0) {
 				if (Integer.parseInt(space[winpat[i][1]].getTeam(false)) == 1) {
 					scores[availible.indexOf(winpat[i][0])] = 10;
 					System.out.println("Score assigned 10");
@@ -116,8 +114,10 @@ public class AI {
 				}
 				System.out.println("Score assigned");
 
-			} else if (Integer.parseInt(space[winpat[i][0]].getTeam(false)) == Integer.parseInt(space[winpat[i][2]].getTeam(false)) && Integer.parseInt(space[winpat[i][1]].getTeam(false)) == 0
-						&& Integer.parseInt(space[winpat[i][0]].getTeam(false)) != 0) {
+			} else if (Integer.parseInt(space[winpat[i][0]].getTeam(false)) == Integer
+					.parseInt(space[winpat[i][2]].getTeam(false))
+					&& Integer.parseInt(space[winpat[i][1]].getTeam(false)) == 0
+					&& Integer.parseInt(space[winpat[i][0]].getTeam(false)) != 0) {
 				if (Integer.parseInt(space[winpat[i][2]].getTeam(false)) == 1) {
 					scores[availible.indexOf(winpat[i][1])] = 10;
 					System.out.println("Score assigned 10");
@@ -159,7 +159,7 @@ public class AI {
 					break;
 				}
 			}
-		} else if(winReady){
+		} else if (winReady) {
 			fin = winAt;
 			System.out.println("Winning move detected!  Moving: " + fin);
 		}

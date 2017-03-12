@@ -15,7 +15,7 @@ public class Main {
 
 	public Main() {
 		init();
-		Game game = new Game(space, value, row, col, r, c);
+		Game game = new Game(space);
 	}
 
 	public void init() {

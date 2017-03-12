@@ -1,30 +1,19 @@
 package com.Kindust.Karsey.TicTacToe;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
 
 	Space[] space;
-	int[] value;
-	ArrayList avail;
-	int[] row;
-	int[] col;
-	int r, c;
+	ArrayList<Integer> avail;
 	String winner;
 	boolean win, tie, validInput;
 
-	public Game(Space[] space, int[] value, int[] row, int[] col, int r, int c) {
+	public Game(Space[] space) {
 		this.space = space;
-		this.value = value;
-		this.row = row;
-		this.col = col;
-		this.r = r;
-		this.c = c;
-
 		win = false;
-		avail = new ArrayList();
+		avail = new ArrayList<Integer>();
 		populate();
 
 		spit();
@@ -35,7 +24,7 @@ public class Game {
 	public void gameLoop() {
 		boolean first = true;
 		while (!win && !tie) {
-			updateBoard();
+			updateBoard(first);
 			int nxt = userInput();
 			while (nxt == 1000) {
 				System.out.println("Malformed input!  Retry.");
@@ -43,8 +32,8 @@ public class Game {
 			}
 			space[nxt].setTeam(1);
 			avail.remove((Object) nxt);
-			//avail.remove(avail.indexOf(nxt));
-			if(checkW() || checkTie()){
+			// avail.remove(avail.indexOf(nxt));
+			if (checkW() || checkTie()) {
 				break;
 			}
 			System.out.println(avail.clone());
@@ -52,7 +41,7 @@ public class Game {
 			enactAI(ai.aiMove(nxt, first));
 			System.out.println(avail.clone());
 			System.out.println(space.clone());
-			if(checkW() || checkTie()){
+			if (checkW() || checkTie()) {
 				break;
 			}
 			first = false;
@@ -61,7 +50,7 @@ public class Game {
 		System.out.println();
 		System.out.println();
 		System.out.println();
-		updateBoard();
+		updateBoard(false);
 		if (win) {
 			System.out.println(winner + " wins!!  Congrats to " + winner + ".  I can almost guarentee its not X :D");
 		}
@@ -76,25 +65,30 @@ public class Game {
 		}
 	}
 
-	public void updateBoard() {
+	public void updateBoard(boolean first) {
 		System.out.println();
 		System.out.println();
 		System.out.println();
 		System.out.println();
+		System.out.println("Availible spots:");
 		for (int i = 0; i < avail.size(); i++) {
 			System.out.println(avail.get(i));
 		}
 		System.out.println();
-
+		if (first) {
+			System.out.println("Scroll up for tips");
+		}
+		System.out.println();
+		
 		for (int i = 0; i < 9; i++) {
-			System.out.print(space[i].getTeam(true));
+			System.out.print(" " + space[i].getTeam(true) );
 			if (i == 2 || i == 5 || i == 8) {
 				System.out.println();
 			} else {
-				System.out.print(" | ");
+				System.out.print(" |");
 			}
 			if (i == 2 || i == 5) {
-				System.out.println("--|---|---");
+				System.out.println("---|---|---");
 			}
 		}
 
@@ -127,7 +121,7 @@ public class Game {
 
 				if (-1 < in && in < 9) {
 					validInput = true;
-					
+
 					return in;
 				} else {
 					// System.out.println("ERROR");
@@ -142,7 +136,7 @@ public class Game {
 	}
 
 	public void enactAI(int move) {
-		if(move == 1000){
+		if (move == 1000) {
 			tie = true;
 			return;
 		}
@@ -165,6 +159,19 @@ public class Game {
 		System.out.println();
 		System.out.println();
 		System.out.println();
+		System.out.println("Board Layout:");
+		System.out.print(" ");
+		for (int i = 0; i < 9; i++) {
+			System.out.print(i);
+			if (i == 2 || i == 5 || i == 8) {
+				System.out.println();
+			} else {
+				System.out.print(" | ");
+			}
+			if (i == 2 || i == 5) {
+				System.out.println("---|---|---");
+			}
+		}
 		/*
 		 * for(int i1 = 0; i1 < 9; i1++){ System.out.println();
 		 * System.out.println(space[i1].getCol() + ", " + space[i1].getRow() +
@@ -174,7 +181,7 @@ public class Game {
 		 * System.out.println();
 		 */
 	}
-	
+
 	public boolean checkW() {
 		if (aWin()) {
 			win = true;
@@ -182,6 +189,7 @@ public class Game {
 		}
 		return false;
 	}
+
 	public boolean checkTie() {
 		if (avail.size() == 0) {
 			tie = true;
@@ -189,6 +197,7 @@ public class Game {
 		}
 		return false;
 	}
+
 	public boolean aWin() {
 		if (Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[1].getTeam(false))
 				&& Integer.valueOf(space[0].getTeam(false)) == Integer.valueOf(space[2].getTeam(false))
