@@ -42,10 +42,10 @@ public class AI {
 			System.out.println("First move!  Must pick " + r);
 			return availible.get(r);
 		} else if (out > 8) {
-			System.out.println("Code 0; Unable to decide, picking: " + r);
+			System.out.println("Code 0 error; Unable to decide, picking: " + r);
 			return availible.get(r);
 		} else if (!availible.contains(out)) {
-			System.out.println("Code 1; Unable to decide, picking: " + r);
+			System.out.println("Code 1 error; Unable to decide, picking: " + r);
 			return availible.get(r);
 		}
 		System.out.println("Going at " + out);
@@ -161,7 +161,7 @@ public class AI {
 			}
 		} else if(winReady){
 			fin = winAt;
-			System.out.println("Suck that!  Moving: " + fin);
+			System.out.println("Winning move detected!  Moving: " + fin);
 		}
 		if (!availible.contains(fin)) {
 			return 1000;

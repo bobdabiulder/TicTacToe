@@ -61,7 +61,7 @@ public class Game {
 		System.out.println();
 		updateBoard();
 		if (win) {
-			System.out.println(winner + " wins!!  Congrats.  I guarentee its not X :D");
+			System.out.println(winner + " wins!!  Congrats to " + winner + ".  I can almost guarentee its not X :D");
 		}
 		if (tie) {
 			System.out.println("Issa tie!");
@@ -105,6 +105,10 @@ public class Game {
 			one: while (!validInput) {
 				Scanner sc = new Scanner(System.in);
 				System.out.print("Input space #: ");
+				while (!sc.hasNextInt()) {
+					System.out.print("Invalid!  Not a number. Try again.  -  ");
+					sc.nextLine();
+				}
 				int in = sc.nextInt();
 
 				try {
@@ -112,7 +116,7 @@ public class Game {
 						// System.out.println("ERROR");
 						// System.exit(1);
 						validInput = false;
-						System.out.print("Invalid! Reenter number, spot already occupied.");
+						System.out.print("Invalid! Reenter number, spot already occupied.  -  ");
 						break one;
 					} else {
 					}
@@ -127,7 +131,7 @@ public class Game {
 					// System.out.println("ERROR");
 					// System.exit(1);
 					validInput = false;
-					System.out.print("Invalid!  Number must be 0 to 8, excluding taken spots.  ");
+					System.out.print("Invalid!  Number must be 0 to 8, excluding taken spots.  -  ");
 					break one;
 				}
 			}
