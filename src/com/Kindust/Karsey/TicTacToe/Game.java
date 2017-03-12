@@ -15,6 +15,12 @@ public class Game {
 		win = false;
 		avail = new ArrayList<Integer>();
 		populate();
+		System.out.println("All set.  ");//https://opensource.org/licenses/MPL-2.0
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("This software is licensed under the Mozilla Public License 2.0");
+		System.out.println("Please visit https://opensource.org/licenses/MPL-2.0 for more info.");
 
 		spit();
 		gameLoop();

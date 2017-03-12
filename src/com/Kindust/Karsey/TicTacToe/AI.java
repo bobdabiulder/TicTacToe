@@ -33,13 +33,13 @@ public class AI {
 		int out = minimax();
 		if (first) {
 			first = false;
-			System.out.println("First move!  Must pick " + backupPick);
+			System.out.println("First move!  Picking spot #" + backupPick);
 			return availible.get(r);
 		} else if (out > 8) {
-			System.out.println("Code 0 error; Unable to decide, picking: " + backupPick);
+			System.out.println("Error code 0 (don't worry; common), decision out of bounds.  Picking: " + backupPick);
 			return availible.get(r);
 		} else if (!availible.contains(out)) {
-			System.out.println("Code 1 error; Unable to decide, picking: " + backupPick);
+			System.out.println("Error code 1 (shouldn't happen!), decision not possible inside index.  Picking: " + backupPick);
 			return availible.get(r);
 		}
 		System.out.println("Going at " + out);

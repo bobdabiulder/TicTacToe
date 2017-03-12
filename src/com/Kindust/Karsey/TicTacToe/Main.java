@@ -14,7 +14,9 @@ public class Main {
 	}
 
 	public Main() {
+		System.out.println("Initializing.");
 		init();
+		System.out.println("Arrays initialized!  Passing on, prepare for the game.");
 		Game game = new Game(space);
 	}
 
