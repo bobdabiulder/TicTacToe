@@ -8,14 +8,16 @@ public class Game {
 	Space[] space;
 	ArrayList<Integer> avail;
 	String winner;
-	boolean win, tie, validInput;
+	Scanner sc;
+	boolean win, tie, validInput, repeat;
 
 	public Game(Space[] space) {
 		this.space = space;
 		win = false;
 		avail = new ArrayList<Integer>();
+		sc = new Scanner(System.in);
 		populate();
-		System.out.println("All set.  ");//https://opensource.org/licenses/MPL-2.0
+		System.out.println("All set.  ");// https://opensource.org/licenses/MPL-2.0
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -24,7 +26,7 @@ public class Game {
 
 		spit();
 		gameLoop();
-
+		repeat = repeat();
 	}
 
 	public void gameLoop() {
@@ -85,9 +87,9 @@ public class Game {
 			System.out.println("Scroll up for tips");
 		}
 		System.out.println();
-		
+
 		for (int i = 0; i < 9; i++) {
-			System.out.print(" " + space[i].getTeam(true) );
+			System.out.print(" " + space[i].getTeam(true));
 			if (i == 2 || i == 5 || i == 8) {
 				System.out.println();
 			} else {
@@ -106,6 +108,7 @@ public class Game {
 		main: while (!validInput) {
 			one: while (!validInput) {
 				Scanner sc = new Scanner(System.in);
+				// sc.reset();
 				System.out.print("Input space #: ");
 				while (!sc.hasNextInt()) {
 					System.out.print("Invalid!  Not a number. Try again.  -  ");
@@ -124,7 +127,6 @@ public class Game {
 					}
 				} catch (Exception e) {
 				}
-
 				if (-1 < in && in < 9) {
 					validInput = true;
 
@@ -184,7 +186,7 @@ public class Game {
 		 * space[i1].getTeam(true) + "(" + space[i1].getTeam(false) + ")"); if(r
 		 * != 2){ r++; } else { r = 0; c++; } } System.out.println();
 		 * System.out.println();
-		 */ 
+		 */
 	}
 
 	public boolean checkW() {
@@ -265,6 +267,33 @@ public class Game {
 			return true;
 		}
 		return false;
+	}
+
+	private boolean repeat() {
+		boolean valInp = false;
+		boolean out = false;
+		//main: while (!valInp) {
+			one: while (!valInp) {
+				sc = new Scanner(System.in);
+				// sc.reset();
+				System.out.print("Play again? 0 = yes, any other # = no.  Input: ");
+				while (!sc.hasNextInt()) {
+					System.out.print("Invalid!  Not a number. Try again.  -  ");
+					sc.nextLine();
+				}
+				int in = sc.nextInt();
+				if (in == 0) {
+					valInp = true;
+
+					return true;
+				} else {
+					// System.out.println("ERROR");
+					// System.exit(1);
+					return false;
+				}
+			}
+		//}
+		return out;
 	}
 
 }

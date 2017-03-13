@@ -18,6 +18,12 @@ public class Main {
 		init();
 		System.out.println("Arrays initialized!  Passing on, prepare for the game.");
 		Game game = new Game(space);
+		while(game.repeat){
+			init();
+			game = new Game(space);
+		}
+		System.out.println("Thanks for playing!");
+		game.sc.close();
 	}
 
 	public void init() {
