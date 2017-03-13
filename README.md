@@ -3,7 +3,7 @@ Hey!  Welcome!  To try this out, just go to the release and grab the jar.  This 
 
 <br/>
 <br/>
-<a href="https://github.com/bobdabiulder/TicTacToe/wiki/How-to-play-(Using-the-.jar)">**To learn how to run the jar, click here for more info.**</a>
+<a href="https://github.com/bobdabiulder/TicTacToe/wiki/How-to-play-(Using-the-.jar)">**To learn how to run the jar on any OS, click here for more info.**</a>
 <br/>
 <br/>
 <br/>
