@@ -3,9 +3,6 @@ package com.Kindust.Karsey.TicTacToe;
 public class Main {
 
 	public int[] value = { -1, 0, 1 }; // Loss, Tie, Win
-	int[] row = { 0, 1, 2 };
-	int[] col = { 0, 1, 2 };
-	int ro, co;
 	int r, c, it1 = 0;
 	Space[] space = new Space[9];
 
