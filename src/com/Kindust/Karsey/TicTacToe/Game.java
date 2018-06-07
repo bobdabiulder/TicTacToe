@@ -17,7 +17,7 @@ public class Game {
 		avail = new ArrayList<Integer>();
 		sc = new Scanner(System.in);
 		populate();
-		System.out.println("All set.  ");// https://opensource.org/licenses/MPL-2.0
+		System.out.println("Ready to play.");// https://opensource.org/licenses/MPL-2.0
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -63,7 +63,7 @@ public class Game {
 			System.out.println(winner + " wins!!  Congrats to " + winner + ".  I can almost guarentee its not X :D");
 		}
 		if (tie) {
-			System.out.println("Issa tie!");
+			System.out.println("Tie!");
 		}
 	}
 

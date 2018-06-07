@@ -11,9 +11,7 @@ public class Main {
 	}
 
 	public Main() {
-		System.out.println("Initializing.");
 		init();
-		System.out.println("Arrays initialized!  Passing on, prepare for the game.");
 		Game game = new Game(space);
 		while(game.repeat){
 			init();
@@ -26,15 +24,12 @@ public class Main {
 	public void init() {
 		c = 0;
 		r = 0;
-		System.out.println("a");
 		for (int it = 0; it <= 8; it++) {
 			space[it] = new Space();
 			space[it].setTeam(0);
 			space[it].setCol(0);
 			space[it].setRow(0);
-			System.out.println("b " + it);
 		}
-		System.out.println("c");
 		for (int i = 0; i < 9; i++) {
 
 			space[i].setCol(c);
@@ -60,9 +55,6 @@ public class Main {
 
 	public void spit() {
 		for (int i1 = 0; i1 < 9; i1++) {
-			System.out.println();
-			System.out.println(space[i1].getCol() + ", " + space[i1].getRow() + " . . ." + space[i1].coord[0]
-					+ space[i1].coord[1] + " Team:" + space[i1].getTeam(true) + "(" + space[i1].getTeam(false) + ")");
 			if (r != 2) {
 				r++;
 			} else {
